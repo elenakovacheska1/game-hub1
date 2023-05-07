@@ -1,6 +1,6 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
+import GameCard from "./GameCard";
 
 interface Game {
 	id: number;
@@ -12,16 +12,20 @@ interface FetchGamesResponse {
 	results: Game[];
 }
 
-const GameGrid = () => {
+interface Props {
+	genreId: number;
+}
+
+const GameGrid = ({ genreId }: Props) => {
 	const [games, setGames] = useState<Game[]>([]);
 	const [error, setError] = useState("");
 
 	useEffect(() => {
 		apiClient
-			.get<FetchGamesResponse>("/games")
+			.get<FetchGamesResponse>(`/games?genres=${genreId}`)
 			.then((res) => setGames(res.data.results))
 			.catch((err) => setError(err.message));
-	});
+	}, [genreId]);
 
 	return (
 		<>
@@ -30,9 +34,11 @@ const GameGrid = () => {
 					{error}
 				</div>
 			)}
-			<ul>
+			<ul className="row list-group-horizontal">
 				{games.map((game) => (
-					<li key={game.id}>{game.name}</li>
+					<li className="col-6 list-group-item" key={game.id}>
+						<GameCard id={game.id} />
+					</li>
 				))}
 			</ul>
 		</>
