@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import styles from "../styles/NavBar.module.css";
 import logo from "../assets/logo.webp";
 import name from "../assets/name.png";
@@ -26,6 +25,18 @@ const NavBar = ({ colorMode, setColorMode }: Props) => {
 			>
 				Toggle Color Mode
 			</button>
+			<div className="form-check form-switch">
+				<input
+					className="form-check-input"
+					type="checkbox"
+					role="switch"
+					id="flexSwitchCheckChecked"
+					onClick={toggleColorMode}
+				/>
+				<label className="form-check-label" htmlFor="flexSwitchCheckChecked">
+					Checked switch checkbox input
+				</label>
+			</div>
 		</>
 	);
 };

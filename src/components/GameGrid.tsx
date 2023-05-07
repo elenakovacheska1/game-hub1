@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
 import GameCard from "./GameCard";
@@ -14,18 +15,28 @@ interface FetchGamesResponse {
 
 interface Props {
 	genreId: number;
+	searchTerm: string;
 }
 
-const GameGrid = ({ genreId }: Props) => {
+const GameGrid = ({ genreId, searchTerm }: Props) => {
 	const [games, setGames] = useState<Game[]>([]);
 	const [error, setError] = useState("");
 
+	let url = "/games";
+	if (genreId) {
+		url = `/games?genres=${genreId}`;
+	}
+	if (searchTerm) {
+		const slug = searchTerm.split(" ").join("-").toLowerCase();
+		url = `/games?search=${slug}`;
+	}
+
 	useEffect(() => {
 		apiClient
-			.get<FetchGamesResponse>(`/games?genres=${genreId}`)
+			.get<FetchGamesResponse>(url)
 			.then((res) => setGames(res.data.results))
 			.catch((err) => setError(err.message));
-	}, [genreId]);
+	}, [url]);
 
 	return (
 		<>
@@ -35,11 +46,13 @@ const GameGrid = ({ genreId }: Props) => {
 				</div>
 			)}
 			<ul className="row list-group-horizontal">
-				{games.map((game) => (
-					<li className="col-6 list-group-item" key={game.id}>
-						<GameCard id={game.id} />
-					</li>
-				))}
+				{games.length
+					? games.map((game) => (
+							<li className="col-6 list-group-item" key={game.id}>
+								<GameCard id={game.id} />
+							</li>
+					  ))
+					: "No games found."}
 			</ul>
 		</>
 	);
