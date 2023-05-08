@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
 import getCroppedImageUrl from "../services/image-url";
 import { IconContext } from "react-icons";
 import { AiFillStar } from "react-icons/ai";
+import PlatformIcons from "./PlatformIcons";
 
 interface Props {
 	id: number;
@@ -20,7 +21,7 @@ interface Requirements {
 }
 
 interface Platforms {
-	platform: Platform[];
+	platform: Platform;
 	released_at: string;
 	requirements: Requirements[];
 }
@@ -51,7 +52,7 @@ const GameCard = ({ id }: Props) => {
 		if (!gameDetails) return "";
 		return Array(gameDetails.rating_top)
 			.fill("")
-			.map((item, i) => (
+			.map((_, i) => (
 				<span key={i}>
 					<IconContext.Provider value={{ color: "gold", size: "25px" }}>
 						{AiFillStar()}
@@ -60,7 +61,9 @@ const GameCard = ({ id }: Props) => {
 			));
 	};
 
-	// console.log(gameDetails?.platforms.map((item) => item.platform));
+	const platforms = gameDetails?.platforms
+		.map((item) => item.platform)
+		.map((p) => p.slug);
 
 	return (
 		<>
@@ -79,6 +82,9 @@ const GameCard = ({ id }: Props) => {
 								{gameDetails.description_raw.substring(0, 100) + "..."}
 							</p>
 							<p className="card-text">{getStars()}</p>
+							<p className="card-text">
+								{platforms && <PlatformIcons platforms={platforms} />}
+							</p>
 						</div>
 					</div>
 				</>

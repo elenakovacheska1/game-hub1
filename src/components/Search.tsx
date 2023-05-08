@@ -2,10 +2,11 @@ import { useRef, RefObject } from "react";
 import { BsSearchHeart } from "react-icons/bs";
 
 interface Props {
+	searchTerm: string;
 	searchGame: (ref: RefObject<HTMLInputElement>) => void;
 }
 
-const Search = ({ searchGame }: Props) => {
+const Search = ({ searchTerm, searchGame }: Props) => {
 	const searchRef = useRef<HTMLInputElement>(null);
 
 	return (
@@ -18,6 +19,7 @@ const Search = ({ searchGame }: Props) => {
 			<input
 				ref={searchRef}
 				onChange={() => searchGame(searchRef)}
+				value={searchTerm}
 				type="text"
 				className="form-control"
 				placeholder="Game Name"

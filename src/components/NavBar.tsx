@@ -17,7 +17,9 @@ const NavBar = ({ colorMode, setColorMode }: Props) => {
 
 	return (
 		<>
-			<div className="d-flex flex-row mb-3 align-items-center">
+			<div
+				className={`d-flex flex-row mb-3 align-items-center ${styles.flexContainer}`}
+			>
 				<div className="p-2">
 					<img src={logo} alt="logo" className={styles.logo} />
 				</div>
@@ -30,12 +32,11 @@ const NavBar = ({ colorMode, setColorMode }: Props) => {
 				<div className="p-2 ms-4 me-4">
 					<div className="form-check form-switch">
 						<input
-							className="form-check-input"
+							className={`form-check-input ${styles.switch}`}
 							type="checkbox"
 							role="switch"
 							id="flexSwitchCheckChecked"
 							onClick={toggleColorMode}
-							style={{ transform: "scale(3)" }}
 						/>
 					</div>
 				</div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
 import GameCard from "./GameCard";
+import dropdownItems from "../services/order-by";
 
 interface Game {
 	id: number;
@@ -17,9 +18,10 @@ interface Props {
 	genreId: number;
 	searchTerm: string;
 	platformId: number;
+	orderById: number;
 }
 
-const GameGrid = ({ genreId, searchTerm, platformId }: Props) => {
+const GameGrid = ({ genreId, searchTerm, platformId, orderById }: Props) => {
 	const [games, setGames] = useState<Game[]>([]);
 	const [error, setError] = useState("");
 
@@ -33,6 +35,14 @@ const GameGrid = ({ genreId, searchTerm, platformId }: Props) => {
 	}
 	if (platformId) {
 		url = `/games?platforms=${platformId}`;
+	}
+	if (orderById) {
+		const slug = dropdownItems.find((item) => item.id === orderById)?.slug;
+		if (url === "/games") {
+			url += `?ordering=${slug}`;
+		} else {
+			url += `&ordering=${slug}`;
+		}
 	}
 
 	useEffect(() => {

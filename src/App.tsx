@@ -11,15 +11,32 @@ function App() {
 	const [colorMode, setColorMode] = useState("dark");
 	const [selectedGenreId, setSelectedGenreId] = useState(0);
 	const [selectedPlatformId, setSelectedPlatformId] = useState(0);
+	const [selectedOrderById, setSelectedOrderById] = useState(0);
 	const [searchTerm, setSearchTerm] = useState("");
 
 	const filterGenre = (id: number) => {
 		setSelectedGenreId(id);
+		setSelectedPlatformId(0);
+		setSelectedOrderById(0);
+		setSearchTerm("");
 	};
 
-	const filterPlatform = (id: number) => {
+	const filterPlatform = (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+		id: number
+	) => {
+		e.preventDefault();
 		setSelectedPlatformId(id);
 	};
+
+	const orderBy = (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+		id: number
+	) => {
+		e.preventDefault();
+		setSelectedOrderById(id);
+	};
+
 	const searchGame = (ref: RefObject<HTMLInputElement>) => {
 		if (!ref.current) return;
 		setSearchTerm(ref.current.value);
@@ -31,7 +48,7 @@ function App() {
 				<div className="row">
 					<div className="col">
 						<NavBar colorMode={colorMode} setColorMode={setColorMode} />
-						<Search searchGame={searchGame} />
+						<Search searchTerm={searchTerm} searchGame={searchGame} />
 					</div>
 				</div>
 				<div className="row">
@@ -47,16 +64,23 @@ function App() {
 						<h1 className="games_title">Games</h1>
 						<div className="filter_platform d-flex flex-row bd-highlight mb-3">
 							<div className="p-2 bd-highlight">
-								<FilterPlatform filterPlatform={filterPlatform} />
+								<FilterPlatform
+									selectedPlatformId={selectedPlatformId}
+									filterPlatform={filterPlatform}
+								/>
 							</div>
 							<div className="p-2 bd-highlight">
-								<OrderBy />
+								<OrderBy
+									selectedOrderById={selectedOrderById}
+									orderBy={orderBy}
+								/>
 							</div>
 						</div>
 						<GameGrid
 							genreId={selectedGenreId}
 							searchTerm={searchTerm}
 							platformId={selectedPlatformId}
+							orderById={selectedOrderById}
 						/>
 					</div>
 				</div>

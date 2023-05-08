@@ -1,6 +1,14 @@
-import React from "react";
+import dropdownItems from "../services/order-by";
 
-const OrderBy = () => {
+interface Props {
+	selectedOrderById: number;
+	orderBy: (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+		id: number
+	) => void;
+}
+
+const OrderBy = ({ selectedOrderById, orderBy }: Props) => {
 	return (
 		<div className="dropdown">
 			<button
@@ -11,27 +19,21 @@ const OrderBy = () => {
 				aria-haspopup="true"
 				aria-expanded="false"
 			>
-				Order by: Relevance
+				{`Order by: `}
+				{dropdownItems.find((item) => item.id === selectedOrderById)?.name ||
+					"Relevance"}
 			</button>
 			<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a className="dropdown-item" href="#">
-					Relevance
-				</a>
-				<a className="dropdown-item" href="#">
-					Date added
-				</a>
-				<a className="dropdown-item" href="#">
-					Name
-				</a>
-				<a className="dropdown-item" href="#">
-					Release date
-				</a>
-				<a className="dropdown-item" href="#">
-					Popularity
-				</a>
-				<a className="dropdown-item" href="#">
-					Average rating
-				</a>
+				{dropdownItems.map((item) => (
+					<a
+						key={item.id}
+						className="dropdown-item"
+						href=""
+						onClick={(e) => orderBy(e, item.id)}
+					>
+						{item.name}
+					</a>
+				))}
 			</div>
 		</div>
 	);

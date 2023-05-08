@@ -5,3 +5,11 @@
 .title {
   height: 100px;
 }
+
+.flexContainer {
+  flex-wrap: wrap;
+}
+
+.switch {
+  transform: scale(3);
+}
