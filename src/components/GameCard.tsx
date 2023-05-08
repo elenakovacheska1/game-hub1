@@ -8,6 +8,23 @@ interface Props {
 	id: number;
 }
 
+interface Platform {
+	id: number;
+	slug: string;
+	name: string;
+}
+
+interface Requirements {
+	minimum: string;
+	recommended: string;
+}
+
+interface Platforms {
+	platform: Platform[];
+	released_at: string;
+	requirements: Requirements[];
+}
+
 interface GameDetails {
 	id: number;
 	name: string;
@@ -15,6 +32,7 @@ interface GameDetails {
 	description_raw: string;
 	background_image: string;
 	rating_top: number;
+	platforms: Platforms[];
 }
 
 const GameCard = ({ id }: Props) => {
@@ -41,6 +59,8 @@ const GameCard = ({ id }: Props) => {
 				</span>
 			));
 	};
+
+	// console.log(gameDetails?.platforms.map((item) => item.platform));
 
 	return (
 		<>

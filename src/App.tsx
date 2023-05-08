@@ -10,12 +10,16 @@ import OrderBy from "./components/OrderBy";
 function App() {
 	const [colorMode, setColorMode] = useState("dark");
 	const [selectedGenreId, setSelectedGenreId] = useState(0);
+	const [selectedPlatformId, setSelectedPlatformId] = useState(0);
 	const [searchTerm, setSearchTerm] = useState("");
 
 	const filterGenre = (id: number) => {
 		setSelectedGenreId(id);
 	};
 
+	const filterPlatform = (id: number) => {
+		setSelectedPlatformId(id);
+	};
 	const searchGame = (ref: RefObject<HTMLInputElement>) => {
 		if (!ref.current) return;
 		setSearchTerm(ref.current.value);
@@ -43,13 +47,17 @@ function App() {
 						<h1 className="games_title">Games</h1>
 						<div className="filter_platform d-flex flex-row bd-highlight mb-3">
 							<div className="p-2 bd-highlight">
-								<FilterPlatform />
+								<FilterPlatform filterPlatform={filterPlatform} />
 							</div>
 							<div className="p-2 bd-highlight">
 								<OrderBy />
 							</div>
 						</div>
-						<GameGrid genreId={selectedGenreId} searchTerm={searchTerm} />
+						<GameGrid
+							genreId={selectedGenreId}
+							searchTerm={searchTerm}
+							platformId={selectedPlatformId}
+						/>
 					</div>
 				</div>
 			</div>

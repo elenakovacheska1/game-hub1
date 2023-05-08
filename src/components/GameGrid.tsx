@@ -16,9 +16,10 @@ interface FetchGamesResponse {
 interface Props {
 	genreId: number;
 	searchTerm: string;
+	platformId: number;
 }
 
-const GameGrid = ({ genreId, searchTerm }: Props) => {
+const GameGrid = ({ genreId, searchTerm, platformId }: Props) => {
 	const [games, setGames] = useState<Game[]>([]);
 	const [error, setError] = useState("");
 
@@ -30,11 +31,16 @@ const GameGrid = ({ genreId, searchTerm }: Props) => {
 		const slug = searchTerm.split(" ").join("-").toLowerCase();
 		url = `/games?search=${slug}`;
 	}
+	if (platformId) {
+		url = `/games?platforms=${platformId}`;
+	}
 
 	useEffect(() => {
 		apiClient
 			.get<FetchGamesResponse>(url)
-			.then((res) => setGames(res.data.results))
+			.then((res) => {
+				setGames(res.data.results);
+			})
 			.catch((err) => setError(err.message));
 	}, [url]);
 
