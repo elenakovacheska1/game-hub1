@@ -4,9 +4,12 @@ import getCroppedImageUrl from "../services/image-url";
 import { IconContext } from "react-icons";
 import { AiFillStar } from "react-icons/ai";
 import PlatformIcons from "./PlatformIcons";
+import { useNavigate, useLocation } from "react-router-dom";
+import styles from "../styles/GameGrid.module.css";
 
 interface Props {
 	id: number;
+	descriptionLength: number;
 }
 
 interface Platform {
@@ -36,17 +39,23 @@ interface GameDetails {
 	platforms: Platforms[];
 }
 
-const GameCard = ({ id }: Props) => {
+const GameCard = ({ id, descriptionLength }: Props) => {
 	const [gameDetails, setGameDetails] = useState<GameDetails>();
 	const [error, setError] = useState("");
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	useEffect(() => {
 		apiClient
 			.get(`/games/${id}`)
 			.then((res) => {
 				setGameDetails(res.data);
 			})
-			.catch((err) => setError(err));
-	}, [id]);
+			.catch((err) => {
+				setError(err);
+				navigate("/");
+			});
+	}, [id, navigate]);
 
 	const getStars = () => {
 		if (!gameDetails) return "";
@@ -69,17 +78,25 @@ const GameCard = ({ id }: Props) => {
 		<>
 			{gameDetails && (
 				<>
-					<div className="card mb-3 me-3">
+					<div
+						className={`card mb-3 me-3 ${styles.games} ${
+							location.pathname !== "/" ? styles.game : ""
+						}`}
+						onClick={() => navigate("/")}
+					>
 						{error}
 						<img
-							className="card-img-top"
+							className={`card-img-top ${
+								location.pathname !== "/" ? styles.imgSize : ""
+							}`}
 							src={getCroppedImageUrl(gameDetails.background_image)}
 							alt="Card image cap"
 						/>
 						<div className="card-body">
 							<h5 className="card-title">{gameDetails.name}</h5>
 							<p className="card-text">
-								{gameDetails.description_raw.substring(0, 100) + "..."}
+								{gameDetails.description_raw.substring(0, descriptionLength) +
+									"..."}
 							</p>
 							<p className="card-text">{getStars()}</p>
 							<p className="card-text">

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
 import GameCard from "./GameCard";
 import dropdownItems from "../services/order-by";
+import { useNavigate } from "react-router-dom";
 
 interface Game {
 	id: number;
@@ -24,6 +25,7 @@ interface Props {
 const GameGrid = ({ genreId, searchTerm, platformId, orderById }: Props) => {
 	const [games, setGames] = useState<Game[]>([]);
 	const [error, setError] = useState("");
+	const navigate = useNavigate();
 
 	let url = "/games";
 	if (genreId) {
@@ -64,8 +66,12 @@ const GameGrid = ({ genreId, searchTerm, platformId, orderById }: Props) => {
 			<ul className="row list-group-horizontal">
 				{games.length
 					? games.map((game) => (
-							<li className="col-6 list-group-item" key={game.id}>
-								<GameCard id={game.id} />
+							<li
+								className="col-6 list-group-item"
+								key={game.id}
+								onClick={() => navigate(`/${game.id}`)}
+							>
+								<GameCard id={game.id} descriptionLength={100} />
 							</li>
 					  ))
 					: "No games found."}

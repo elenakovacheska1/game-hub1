@@ -33,8 +33,8 @@ const PlatformIcons = ({ platforms }: Props) => {
 
 	return (
 		<>
-			{platforms.map((p) => (
-				<span>{icons[p as keyof typeof icons]} </span>
+			{platforms.map((p, i) => (
+				<span key={i}>{icons[p as keyof typeof icons]} </span>
 			))}
 		</>
 	);

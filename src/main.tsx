@@ -1,10 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import ErrorPage from "./components/ErrorPage.tsx";
+import "./index.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Game from "./components/Game.tsx";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <App />,
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: "/:gameId",
+		element: <Game />,
+	},
+]);
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>
+);
