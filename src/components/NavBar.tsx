@@ -1,6 +1,7 @@
 import styles from "../styles/NavBar.module.css";
 import logo from "../assets/logo.webp";
 import name from "../assets/name.png";
+import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 
 interface Props {
 	colorMode: string;
@@ -16,26 +17,31 @@ const NavBar = ({ colorMode, setColorMode }: Props) => {
 
 	return (
 		<>
-			<img src={logo} alt="logo" className={styles.logo} />
-			<img src={name} alt="title" className={styles.title} />
-			<button
-				type="button"
-				className="btn btn-primary mb-3"
-				onClick={toggleColorMode}
-			>
-				Toggle Color Mode
-			</button>
-			<div className="form-check form-switch">
-				<input
-					className="form-check-input"
-					type="checkbox"
-					role="switch"
-					id="flexSwitchCheckChecked"
-					onClick={toggleColorMode}
-				/>
-				<label className="form-check-label" htmlFor="flexSwitchCheckChecked">
-					Checked switch checkbox input
-				</label>
+			<div className="d-flex flex-row mb-3 align-items-center">
+				<div className="p-2">
+					<img src={logo} alt="logo" className={styles.logo} />
+				</div>
+				<div className="p-2">
+					<img src={name} alt="title" className={styles.title} />
+				</div>
+				<div className="p-2">
+					<BsMoonStarsFill size={70} />
+				</div>
+				<div className="p-2 ms-4 me-4">
+					<div className="form-check form-switch">
+						<input
+							className="form-check-input"
+							type="checkbox"
+							role="switch"
+							id="flexSwitchCheckChecked"
+							onClick={toggleColorMode}
+							style={{ transform: "scale(3)" }}
+						/>
+					</div>
+				</div>
+				<div className="p-2">
+					<BsSunFill size={70} />
+				</div>
 			</div>
 		</>
 	);
