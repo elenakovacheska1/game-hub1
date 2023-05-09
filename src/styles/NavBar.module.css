@@ -13,3 +13,7 @@
 .switch {
   transform: scale(3);
 }
+
+.contact {
+  border: 1px dotted whitesmoke;
+}

@@ -43,6 +43,12 @@ const NavBar = () => {
 						<BsSunFill size={60} />
 					</div>
 				</div>
+				<div className={`p-2 ms-auto mt-3 ${styles.contact}`}>
+					<p>Contact me:</p>
+					<p>Elena Kovacheska</p>
+					<p>kovacheskaelena@gmail.com</p>
+					<p>+389 71 216 556</p>
+				</div>
 			</div>
 		</>
 	);
