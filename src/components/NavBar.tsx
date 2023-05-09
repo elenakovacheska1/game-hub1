@@ -1,14 +1,11 @@
+import { useState } from "react";
 import styles from "../styles/NavBar.module.css";
 import logo from "../assets/logo.webp";
 import name from "../assets/name.png";
 import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 
-interface Props {
-	colorMode: string;
-	setColorMode: (colorMode: string) => void;
-}
-
-const NavBar = ({ colorMode, setColorMode }: Props) => {
+const NavBar = () => {
+	const [colorMode, setColorMode] = useState("dark");
 	const toggleColorMode = () => {
 		const newColorMode = colorMode === "dark" ? "light" : "dark";
 		document.documentElement.setAttribute("data-bs-theme", newColorMode);

@@ -9,7 +9,6 @@ import OrderBy from "./components/OrderBy";
 import { useNavigate } from "react-router-dom";
 
 function App() {
-	const [colorMode, setColorMode] = useState("dark");
 	const [selectedGenreId, setSelectedGenreId] = useState(0);
 	const [selectedPlatformId, setSelectedPlatformId] = useState(0);
 	const [selectedOrderById, setSelectedOrderById] = useState(0);
@@ -49,7 +48,7 @@ function App() {
 			<div className="container">
 				<div className="row">
 					<div className="col">
-						<NavBar colorMode={colorMode} setColorMode={setColorMode} />
+						<NavBar />
 						<Search searchTerm={searchTerm} searchGame={searchGame} />
 					</div>
 				</div>
