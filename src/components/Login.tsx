@@ -19,7 +19,6 @@ const Login = () => {
 	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
 		validateFormData();
-		console.log("logged in");
 		navigate("/");
 	};
 

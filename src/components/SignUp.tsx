@@ -20,7 +20,16 @@ const SignUp = () => {
 	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
 		validateData();
+		signUp();
 		navigate("/");
+	};
+
+	const signUp = () => {
+		if (!nameRef.current) return;
+		localStorage.setItem(
+			"user",
+			JSON.stringify({ name: nameRef.current.value })
+		);
 	};
 
 	const validateData = () => {
