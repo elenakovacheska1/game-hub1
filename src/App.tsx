@@ -63,7 +63,7 @@ function App() {
 					</div>
 					<div className="col-9">
 						<h1 className="games_title">Games</h1>
-						<div className="filter_platform d-flex flex-row bd-highlight mb-3">
+						<div className="filter_platform d-flex flex-row bd-highlight mb-3 flex-wrap">
 							<div className="p-2 bd-highlight">
 								<FilterPlatform
 									selectedPlatformId={selectedPlatformId}
