@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Game from "./components/Game.tsx";
 import SignUp from "./components/SignUp.tsx";
 import Login from "./components/Login.tsx";
+import { render } from "react-dom";
 
 const router = createBrowserRouter([
 	{
@@ -28,8 +29,9 @@ const router = createBrowserRouter([
 	},
 ]);
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+render(
 	<React.StrictMode>
 		<RouterProvider router={router} />
-	</React.StrictMode>
+	</React.StrictMode>,
+	document.getElementById("root")
 );
