@@ -7,19 +7,13 @@
 .game {
   display: block;
   width: 100%;
-  max-width: 800px;
   
 }
 
-.imgSize {
+.size {
   width: 100%;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
 
-@media screen and (min-width: 820px) {
-  .game {
-    margin: 0 auto 0 0;
-  }
-}

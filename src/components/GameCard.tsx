@@ -52,7 +52,7 @@ const GameCard = ({ id, descriptionLength }: Props) => {
 				setGameDetails(res.data);
 			})
 			.catch((err) => {
-				setError(err);
+				setError(err.message);
 				navigate("/");
 			});
 	}, [id, navigate]);
@@ -79,20 +79,24 @@ const GameCard = ({ id, descriptionLength }: Props) => {
 			{gameDetails && (
 				<>
 					<div
-						className={`card mb-3 me-3 ${styles.games} ${
-							location.pathname !== "/" ? styles.game : ""
+						className={`d-flex flex-column card mb-3 me-3 ${styles.games} ${
+							location.pathname === `/${id}` ? styles.game : ""
 						}`}
 						onClick={() => navigate("/")}
 					>
 						{error}
 						<img
-							className={`card-img-top ${
-								location.pathname !== "/" ? styles.imgSize : ""
+							className={`p-2 card-img-top ${
+								location.pathname === `/${id}` ? styles.size : ""
 							}`}
 							src={getCroppedImageUrl(gameDetails.background_image)}
 							alt="Card image cap"
 						/>
-						<div className="card-body">
+						<div
+							className={`p-2 card-body ${
+								location.pathname === `/${id}` ? styles.size : ""
+							}`}
+						>
 							<h5 className="card-title">{gameDetails.name}</h5>
 							<p className="card-text">
 								{gameDetails.description_raw.substring(0, descriptionLength) +
