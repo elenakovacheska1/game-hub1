@@ -24,10 +24,13 @@ const NavBar = () => {
 					<img src={name} alt="title" className={styles.title} />
 				</div>
 				<div className="p-2">
-					<BsMoonStarsFill size={70} />
-				</div>
-				<div className="p-2 ms-4 me-4">
-					<div className="form-check form-switch">
+					<div style={{ display: "inline-block" }}>
+						<BsMoonStarsFill size={60} />
+					</div>
+					<div
+						className="form-check form-switch ms-5 me-5"
+						style={{ display: "inline-block" }}
+					>
 						<input
 							className={`form-check-input ${styles.switch}`}
 							type="checkbox"
@@ -36,9 +39,9 @@ const NavBar = () => {
 							onClick={toggleColorMode}
 						/>
 					</div>
-				</div>
-				<div className="p-2">
-					<BsSunFill size={70} />
+					<div style={{ display: "inline-block" }}>
+						<BsSunFill size={60} />
+					</div>
 				</div>
 			</div>
 		</>
