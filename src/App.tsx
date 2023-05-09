@@ -23,10 +23,6 @@ function App() {
 
 	const [currentUser, setCurrentUser] = useState(getCurrentUser());
 
-	useEffect(() => {
-		setCurrentUser(getCurrentUser());
-	}, [localStorage.getItem("name")]);
-
 	const filterGenre = (id: number) => {
 		setSelectedGenreId(id);
 		setSelectedPlatformId(0);

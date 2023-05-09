@@ -6,6 +6,7 @@ import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 
 const NavBar = () => {
 	const [colorMode, setColorMode] = useState("dark");
+	const stylesObj = { display: "inline-block" };
 	const toggleColorMode = () => {
 		const newColorMode = colorMode === "dark" ? "light" : "dark";
 		document.documentElement.setAttribute("data-bs-theme", newColorMode);
@@ -24,13 +25,10 @@ const NavBar = () => {
 					<img src={name} alt="title" className={styles.title} />
 				</div>
 				<div className="p-2">
-					<div style={{ display: "inline-block" }}>
+					<div style={stylesObj}>
 						<BsMoonStarsFill size={60} />
 					</div>
-					<div
-						className="form-check form-switch ms-5 me-5"
-						style={{ display: "inline-block" }}
-					>
+					<div className="form-check form-switch ms-5 me-5" style={stylesObj}>
 						<input
 							className={`form-check-input ${styles.switch}`}
 							type="checkbox"
@@ -39,12 +37,12 @@ const NavBar = () => {
 							onClick={toggleColorMode}
 						/>
 					</div>
-					<div style={{ display: "inline-block" }}>
+					<div style={stylesObj}>
 						<BsSunFill size={60} />
 					</div>
 				</div>
-				<div className={`p-2 ms-auto mt-3 ${styles.contact}`}>
-					<p>Contact me:</p>
+				<div className={`p-2 ms-auto mt-3 rounded ${styles.contact}`}>
+					<p className="fw-bold">Contact me:</p>
 					<p>Elena Kovacheska</p>
 					<p>kovacheskaelena@gmail.com</p>
 					<p>+389 71 216 556</p>
