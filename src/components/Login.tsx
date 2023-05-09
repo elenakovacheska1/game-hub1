@@ -4,6 +4,12 @@ import { useState } from "react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 
+interface User {
+	name: string;
+	email: string;
+	password: string;
+}
+
 const Login = () => {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -19,7 +25,30 @@ const Login = () => {
 	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
 		validateFormData();
+		login();
 		navigate("/");
+	};
+
+	const login = () => {
+		if (!emailRef.current || !passwordRef.current) return;
+		const currentUser = {
+			email: emailRef.current.value,
+			password: passwordRef.current.value,
+		};
+		const allUsersStr = localStorage.getItem("allUsers");
+		if (!allUsersStr) {
+			navigate("/signup");
+			return;
+		}
+		const allUsersObj = JSON.parse(allUsersStr);
+		const userFound = allUsersObj.find(
+			(user: User) => user.email === currentUser.email
+		);
+		if (!userFound) {
+			navigate("/signup");
+			return;
+		}
+		localStorage.setItem("user", JSON.stringify({ name: userFound.name }));
 	};
 
 	const validateFormData = () => {

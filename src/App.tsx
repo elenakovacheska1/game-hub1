@@ -4,7 +4,7 @@ import GameGrid from "./components/GameGrid";
 import Genres from "./components/Genres";
 import Search from "./components/Search";
 import FilterPlatform from "./components/FilterPlatform";
-import { useState, RefObject } from "react";
+import { useState, RefObject, useEffect } from "react";
 import OrderBy from "./components/OrderBy";
 import { useNavigate } from "react-router-dom";
 
@@ -21,8 +21,11 @@ function App() {
 		return "";
 	};
 
-	// let currentUser = getCurrentUser();
 	const [currentUser, setCurrentUser] = useState(getCurrentUser());
+
+	useEffect(() => {
+		setCurrentUser(getCurrentUser());
+	}, [localStorage.getItem("name")]);
 
 	const filterGenre = (id: number) => {
 		setSelectedGenreId(id);

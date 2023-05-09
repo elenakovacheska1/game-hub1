@@ -25,11 +25,25 @@ const SignUp = () => {
 	};
 
 	const signUp = () => {
-		if (!nameRef.current) return;
+		if (!nameRef.current || !emailRef.current || !passwordRef.current) return;
 		localStorage.setItem(
 			"user",
 			JSON.stringify({ name: nameRef.current.value })
 		);
+		const allUsersStr = localStorage.getItem("allUsers");
+		const currentUser = {
+			name: nameRef.current.value,
+			email: emailRef.current.value,
+			password: passwordRef.current.value,
+		};
+
+		let users = [];
+		if (!allUsersStr) {
+			users.push(currentUser);
+		} else {
+			users = [...JSON.parse(allUsersStr), currentUser];
+		}
+		localStorage.setItem("allUsers", JSON.stringify(users));
 	};
 
 	const validateData = () => {
