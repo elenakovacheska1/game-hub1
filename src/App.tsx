@@ -6,6 +6,7 @@ import Search from "./components/Search";
 import FilterPlatform from "./components/FilterPlatform";
 import { useState, RefObject } from "react";
 import OrderBy from "./components/OrderBy";
+import { useNavigate } from "react-router-dom";
 
 function App() {
 	const [colorMode, setColorMode] = useState("dark");
@@ -13,6 +14,7 @@ function App() {
 	const [selectedPlatformId, setSelectedPlatformId] = useState(0);
 	const [selectedOrderById, setSelectedOrderById] = useState(0);
 	const [searchTerm, setSearchTerm] = useState("");
+	const navigate = useNavigate();
 
 	const filterGenre = (id: number) => {
 		setSelectedGenreId(id);
@@ -74,6 +76,24 @@ function App() {
 									selectedOrderById={selectedOrderById}
 									orderBy={orderBy}
 								/>
+							</div>
+							<div className="p-2 bd-highlight">
+								<button
+									type="button"
+									className="btn btn-secondary"
+									onClick={() => navigate("/signup")}
+								>
+									Sign Up
+								</button>
+							</div>
+							<div className="p-2 bd-highlight">
+								<button
+									type="button"
+									className="btn btn-secondary"
+									onClick={() => navigate("/login")}
+								>
+									Login
+								</button>
 							</div>
 						</div>
 						<GameGrid
