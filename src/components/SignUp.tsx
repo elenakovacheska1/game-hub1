@@ -98,7 +98,7 @@ const SignUp = () => {
 							id="password"
 							placeholder="Enter your password"
 							ref={passwordRef}
-							onChange={() => validateData()}
+							onChange={validateData}
 						/>
 						{errors.password && (
 							<div className="alert alert-danger" role="alert">
